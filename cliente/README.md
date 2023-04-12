@@ -131,7 +131,9 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
 ```
 4.2 - Response de exemplo:
 ```
-204 - DELETED
+{
+    "mensagem": "{livro_id} deletado com sucesso!"
+}
 ```
 ## Licensing
 
