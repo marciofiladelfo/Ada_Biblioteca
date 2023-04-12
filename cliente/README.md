@@ -72,37 +72,39 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 - Descrição: Este método é responsável por listar todos os clientes.
 
 2.1 - JSON Response de exemplo:
-
-    {
-        "nome": "Milena Dias",
-        "contato": "11-94444-4444",
-        "email": "milena@gmail.com",
-        "idade": "18",
-        "endereco": "Rua A Bairro X  n° 20, São Paulo - SP"
-    },
-    {
-        "nome": "Joaquim Santos",
-        "contato": "11-95555-5555",
-        "email": "joaquim@gmail.com",
-        "idade": "20",
-        "endereco": "Rua C Bairro Z  n° 55, São Paulo - SP"
-    }
-
-
-3 – Alterar cleinte por id
-
-- API: /cleinte
+```
+{
+	"cliente": [
+		{
+			"nome": "Milena Dias",
+			"contato": "11-94444-4444",
+			"email": "milena@gmail.com",
+			"idade": "18",
+			"endereco": "Rua A Bairro X  n° 20, São Paulo - SP"
+		},
+		{
+			"nome": "Joaquim Santos",
+			"contato": "11-95555-5555",
+			"email": "joaquim@gmail.com",
+			"idade": "20",
+			"endereco": "Rua C Bairro Z  n° 55, São Paulo - SP"
+		}
+	]
+}
+```
+3 – Alterar cliente por id
+- API: /cliente
 - End Point URL Path:  cliente/{id}
 - Method: PUT
 - Objetivo: Alterar informações especificas de um determinado cliente.
 - Descrição: Este método é responsável alterar informações de um determinado id.
 
 3.1 - Parametros Request de exemplo:
-
+```
 PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
-
+```
 3.2 - JSON Request de exemplo:
-
+```
     {
         "nome": "Milena Dias",
         "contato": "11-94444-4444",
@@ -110,13 +112,13 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
         "idade": "18",
         "endereco": "Rua C Bairro V  n° 15, São Paulo - SP"
     }
-    
+  ```
+  
 3.3 - Response de exemplo:
-``
+```
 201 - CREATED
-``
+```
 4 – Deletar livro por id
-
 - API: /cliente
 - End Point URL Path:  cliente/{id}
 - Method: Delete
@@ -124,9 +126,13 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
 - Descrição: Este método é responsável deletar informações de um determinado id.
 
 4.1 - Parametros Request de exemplo:
-
+```
 PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
-
+```
+4.2 - Response de exemplo:
+```
+204 - DELETED
+```
 ## Licensing
 
 Para reportar bugs, sugerir novas funcionalidades e melhorias entre em contato com alguns dos membros responsáveis
