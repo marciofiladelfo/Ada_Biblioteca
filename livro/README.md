@@ -1,7 +1,5 @@
-<img src="./logo.png" alt="logo" style="width:200px;"/>
-
 ## Cadastrar, listar, alterar, deletar e gerenciar o estoque dos livros 
-> Livros
+# Livros
 
 Resumo Geral do projeto.
 Esta API Rest é responsável por gerir toda a entidade livros.
@@ -50,7 +48,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 - Descrição: Este método é responsável por cadastrar livros
 
 1.1 - JSON Request de exemplo:
-
+```
 {
     "nome": "Orgulho e preconceito",
     "autor": "Jane Austen",
@@ -59,7 +57,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
     "genero": "Romance",
     "quantidade": "10"
 }
-
+```
 2 – Listar livros
 
 - API: /livros
@@ -69,25 +67,28 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 - Descrição: Este método é responsável por litar todos os livros
 
 2.1 - JSON Response de exemplo:
-
-    {
-        "nome": "Orgulho e preconceito",
-        "autor": "Jane Austen",
-        "editora": "Camelot Editora",
-        "descricao": "É um dos mais aclamados romances da escritora inglesa Jane Austen",
-        "genero": "Romance",
-        "quantidade": "10"
-    },
-    {
-        "nome": "Em busca do tempo perdido",
-        "autor": "Marcel Proust",
-        "editora": "Nova fronteira",
-        "descricao": "Em busca do tempo perdido é uma das maiores criações da literatura mundial",
-        "genero": "Romance",
-        "quantidade": "10"
-    }
-
-
+```
+{
+    "Livros": [
+        {
+            "nome": "Orgulho e preconceito",
+            "autor": "Jane Austen",
+            "editora": "Camelot Editora",
+            "descricao": "É um dos mais aclamados romances da escritora inglesa Jane Austen",
+            "genero": "Romance",
+            "quantidade": "10"
+        },
+        {
+            "nome": "Em busca do tempo perdido",
+            "autor": "Marcel Proust",
+            "editora": "Nova fronteira",
+            "descricao": "Em busca do tempo perdido é uma das maiores criações da literatura mundial",
+            "genero": "Romance",
+            "quantidade": "10"
+        }
+    ]
+}
+```
 3 – Alterar livro por id
 
 - API: /livros
@@ -101,7 +102,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 PathParams: livro_Id (CDPROD): path param (livro_Id) value=1</br>
 
 3.2 - JSON Request de exemplo:
-
+```
 {
     "nome": "Orgulho e preconceito",
     "autor": "Jane Austen",
@@ -110,6 +111,12 @@ PathParams: livro_Id (CDPROD): path param (livro_Id) value=1</br>
     "genero": "Romance",
     "quantidade": "15"
 }
+```
+
+3.3 - Response de exemplo:
+```
+201 - CREATED
+```
 
 4 – Deletar livro por id
 
@@ -118,6 +125,15 @@ PathParams: livro_Id (CDPROD): path param (livro_Id) value=1</br>
 - Method: Delete
 - Objetivo: deletar informações especificas de um determinado livro.
 - Descrição: Este método é responsável deletar informações de um determinado id.
+
+4.1 - Parametros Request de exemplo:
+```
+PathParams: livro_id (CDPROD): path param (livro_id) value=1</br>
+```
+4.2 - Response de exemplo:
+```
+204 - DELETED
+```
 
 3.1 - Parametros Request de exemplo:
 
