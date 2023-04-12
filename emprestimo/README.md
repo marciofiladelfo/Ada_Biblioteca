@@ -1,5 +1,3 @@
-<img src="./logo.png" alt="logo" style="width:200px;"/>
-
 ## Cadastrar, listar, alterar e deletar  clientes
 > GerenciarEmprestimo
 
@@ -50,13 +48,14 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 - Descrição: Este método é responsável por cadastrar um emprestimo de livro.
 
 1.1 - JSON Request de exemplo:
-
+```
 {
     "idCliente": 1,
     "idLivro": 2
 }
-
+```
 1.2 - JSON Response de exemplo:
+```
     {   
         "dataEmprestimo": "10/04/2023",
         "dataDevolucao":  "15/04/2023"
@@ -80,7 +79,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
                 "dataDevolucao" : "10/04/2023"
             }
     }
-
+```
 2 – Listar livros do cliente
 
 - API: /emprestimo/
@@ -92,7 +91,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 
 2.1 - JSON Response de exemplo:
-
+```
     {   
         "id": 1
         "nome": "Mariana Silva",
@@ -120,7 +119,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
                 "dataDevolucao" : "15/04/2023"
             }
     }
-
+```
 3 – Deletar emprestimo do cliente
 
 - API: /Emprestimo
@@ -130,13 +129,12 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 - Descrição: Este método é responsável por deletar um emprestimo de livro.
 
 3.1 - JSON Request de exemplo:
-
+```
 {
     "idCliente": 1,
     "idLivro": 2
 }
-
-
+```
 4 - Listar todos os livros disponiveis
 
 - API: /emprestimo
@@ -144,7 +142,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 - Method: Get
 - Objetivo: Consultar na base da API Livros, e retornar apenas os que estiverem o quantidade => que 1. 
 - Descrição: Este método é responsável listar todos os livros disponiveis no estoque.
-
+```
 {
     "nome": "Orgulho e preconceito",
     "autor": "Jane Austen",
@@ -161,7 +159,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
     "genero": "Romance",
     "quantidade": "10"
 }
-
+```
 
 5 - Listar todos os livros pendentes de devolução
 
@@ -170,7 +168,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 - Method: GET
 - Objetivo: Listar todos os livros ao qual a data de devolução seja => que hoje.
 - Descrição: Este método é responsável listar todos os livros que esteja com a data de devolução vencida.
-
+```
 {
     "nome": "Orgulho e preconceito",
     "autor": "Jane Austen",
@@ -189,7 +187,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
     "quantidade": "10"
     "dataDevolucao" : "10/04/2023"
 }
-
+```
 
 6 - Listar todos os livros pendentes de devolução de um cliente
 
@@ -200,7 +198,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 - Descrição: Este método é responsável listar todos os livros que esteja com a data de devolução vencida de um cliente.
 
 PathParams: cliente_Id (cliente_Id): path param (cliente_Id) value=1</br>
-
+```
 {
 "id": 1
 "nome": "Mariana Silva",
@@ -228,7 +226,7 @@ PathParams: cliente_Id (cliente_Id): path param (cliente_Id) value=1</br>
         "dataDevolucao" : "10/04/2023"
     }
 }
-
+```
 
 ## Licensing
 
