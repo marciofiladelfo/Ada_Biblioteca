@@ -101,7 +101,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 
 3.1 - Parametros Request de exemplo:
 ```
-PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
+PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1
 ```
 3.2 - JSON Request de exemplo:
 ```
