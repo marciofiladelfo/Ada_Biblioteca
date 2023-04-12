@@ -110,7 +110,11 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
         "idade": "18",
         "endereco": "Rua C Bairro V  n° 15, São Paulo - SP"
     }
-
+    
+3.3 - Response de exemplo:
+``
+201 - CREATED
+``
 4 – Deletar livro por id
 
 - API: /cliente
