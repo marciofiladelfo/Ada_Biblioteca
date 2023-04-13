@@ -51,7 +51,9 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 ```
 {
     "idCliente": 1,
-    "idLivro": 2
+    [
+        "idLivro": 2
+    ]
 }
 ```
 1.2 - JSON Response de exemplo:
