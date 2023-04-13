@@ -51,7 +51,9 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 ```
 {
     "idCliente": 1,
-    "idLivro": 2
+    [
+        "idLivro": 2
+    ]
 }
 ```
 1.2 - JSON Response de exemplo:
@@ -108,7 +110,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 
 - API: /Emprestimo
 - End Point URL Path:  /emprestimo/devolucao
-- Method: DELETE
+- Method: PUT
 - Objetivo: deletar todas as informações necessárias de um id_livro que esteja vinculado a um "X" = "id_cliente" no momento da devolucao.
 - Descrição: Este método é responsável por deletar um emprestimo de livro.
 
@@ -116,7 +118,8 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 ```
 {
     "idCliente": 1,
-    "idLivro": 2
+    "idLivro": 2,
+    "status": "Devolvido"
 }
 ```
 4 - Listar todos os livros disponiveis
