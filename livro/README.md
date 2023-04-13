@@ -182,7 +182,7 @@ PathParams: livro_id (CDPROD): path param (livro_id) value=1
 
 - API: /livros
 - End Point URL Path:  livros/{id}/estoque
-- Method: GET
+- Method: PATCH
 - Objetivo: Alterar informações de quantidade de um determinado livro buscando pelo id.
 - Descrição: Este método é responsável gerenciar estoque de um determinado id, assim que houver emprestimo ou devolutiva do mesmo.
 
