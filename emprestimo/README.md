@@ -42,7 +42,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 1 – Cadastrar emprestimo
 
 - API: /Emprestimo
-- End Point URL Path:  /emprestimo/cadastrar
+- End Point URL Path:  /emprestimo
 - Method: POST
 - Objetivo: Cadastrar todas as informações necessárias para identificação de um cliente e livro, para processo de cadastro emprestimo.
 - Descrição: Este método é responsável por cadastrar um emprestimo de livro.
@@ -51,8 +51,16 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 ```
 {
     "idCliente": 1,
-    [
-        "idLivro": 2
+    "livros": [
+        {
+            "idLivro": 1
+        },
+        {
+            "idLivro": 2
+        },
+        {
+            "idLivro": 3
+        }
     ]
 }
 ```
