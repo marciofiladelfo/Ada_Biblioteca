@@ -237,6 +237,8 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
 
 ```
 
+
+### Avaliar se há necessidade deste recurso.
 6 - Listar todos os livros pendentes de devolução de um cliente
 
 - API: /emprestimo
