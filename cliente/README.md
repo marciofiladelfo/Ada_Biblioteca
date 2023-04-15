@@ -118,7 +118,7 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1
 ```
 201 - CREATED
 ```
-4 – Deletar Cliente por id
+4 – Deletar livro por id
 - API: /cliente
 - End Point URL Path:  cliente/{id}
 - Method: Delete
@@ -132,7 +132,7 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1</br>
 4.2 - Response de exemplo:
 ```
 {
-    "mensagem": "{cliente_id} deletado com sucesso!"
+    "mensagem": "{livro_id} deletado com sucesso!"
 }
 ```
 ## Licensing

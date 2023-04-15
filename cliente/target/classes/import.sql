@@ -1,0 +1,4 @@
+INSERT INTO CLIENTE (ID, NOME, IDADE, TELEFONE, ENDERECO, EMAIL) VALUES (100,'Milena Dias', '20', '11-999999999', 'Rua a, bairro B, N° 1, São Paulo', 'milena@gmail.com');
+INSERT INTO CLIENTE (ID, NOME, IDADE, TELEFONE, ENDERECO, EMAIL) VALUES (101,'Geovana Silva', '18', '11-88888888', 'Rua b, bairro c, N° 2, São Paulo', 'geovana@gmail.com');
+INSERT INTO CLIENTE (ID, NOME, IDADE, TELEFONE, ENDERECO, EMAIL) VALUES (102,'Vitoria Santos', '19', '11-777777777', 'Rua c, bairro d, N° 3, São Paulo', 'vitoria@gmail.com');
+INSERT INTO CLIENTE (ID, NOME, IDADE, TELEFONE, ENDERECO, EMAIL) VALUES (103,'Mariana Martins', '35', '11-666666666', 'Rua d, bairro e, N° 4, São Paulo', 'mariana@gmail.com');
