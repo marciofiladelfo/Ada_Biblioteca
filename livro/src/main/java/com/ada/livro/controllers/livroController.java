@@ -2,6 +2,7 @@ package com.ada.livro.controllers;
 
 import java.util.List;
 
+import com.ada.livro.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ada.livro.dtos.EstoqueDto;
 import com.ada.livro.model.Livro;
-import com.ada.livro.services.LivroService;
+import com.ada.livro.services.LivroServiceImpl;
 
 @RestController
 @RequestMapping("livros")

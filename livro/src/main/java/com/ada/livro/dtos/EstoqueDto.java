@@ -8,9 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data 																											//Inclui todos os Gte e Set
-@AllArgsConstructor 																							//Inclui os construtores com todos os paramentros
-@NoArgsConstructor 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EstoqueDto {
     private Integer quantidade;
     

@@ -2,6 +2,7 @@ package com.ada.cliente.controllers;
 
 import java.util.List;
 
+import com.ada.cliente.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ada.cliente.model.Cliente;
-import com.ada.cliente.services.ClienteService;
-
 
 @RestController
 @RequestMapping("clientes")
@@ -23,7 +22,7 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
-	@PostMapping ("")
+	@PostMapping
 	public Cliente save(@RequestBody Cliente cliente) {				
 		return clienteService.save(cliente);
 	}
