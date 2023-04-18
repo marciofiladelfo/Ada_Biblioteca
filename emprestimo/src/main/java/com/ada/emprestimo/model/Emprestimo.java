@@ -1,22 +1,55 @@
 package com.ada.emprestimo.model;
 
-import com.ada.cliente.model.Cliente;
-import com.ada.emprestimo.util.Status;
-import com.ada.livro.model.Livro;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.LocalDate;
+import java.util.List;
 
-import java.util.Date;
+import org.modelmapper.ModelMapper;
 
-@Getter
-@Setter
+import com.ada.emprestimo.dtos.EmprestimoDtoCadastro;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data 																						
+@AllArgsConstructor 																		
+@NoArgsConstructor 																			
+@Entity 																					
+@Table(name="EMPRESTIMO")
 public class Emprestimo {
 
+	@Id 																					
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column(name = "id_emprestimo")
     private Integer id;
-    private Livro id_livro;
-    private Cliente id_cliente;
-    private Date dataEmprestimo;
-    private Date dataDevolucao;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataEmprestimo;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataDevolucao;
+	@Column(name = "quantidade_emprestimo")
     private Integer quantidade;
-    private Status status;
+    private String status;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+
+	@OneToMany(mappedBy = "emprestimo")
+	private List<Livro> livro;
+    
+	public EmprestimoDtoCadastro toEmprestimoDtoCadastro() {												
+		ModelMapper mapper = new ModelMapper();
+		EmprestimoDtoCadastro dto = mapper.map(this, EmprestimoDtoCadastro.class);
+		return dto;
+	}
 }
