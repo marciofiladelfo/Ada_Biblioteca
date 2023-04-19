@@ -24,7 +24,6 @@ public class ClienteServiceImpl implements ClienteService{
                 .uri(uri, idCliente)
                 .retrieve()
                 .bodyToMono(Cliente.class).block();
-		//.block() - sicrona
 		save(dadosCliente);
 		return dadosCliente;
 	}
