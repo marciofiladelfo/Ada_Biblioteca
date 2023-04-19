@@ -33,7 +33,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Cliente update(int id, Cliente cliente) {
 		Optional<Cliente> optional = clienteRepository.findById(id);
-		if (optional.isPresent() == true){ 
+		if (optional.isPresent()){
 			Cliente clienteBD = optional.get();
 			clienteBD.setNome(cliente.getNome());
 			clienteBD.setEmail(cliente.getEmail());

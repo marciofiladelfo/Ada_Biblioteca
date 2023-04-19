@@ -20,6 +20,6 @@ public class EmprestimoController {
 	@PostMapping()
 	public ResponseEntity<EmprestimoCadastroDTO> save(@RequestBody EmprestimoCadastroDTO emprestimoCadastroDTO) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(emprestimoService.save(emprestimoCadastroDTO.toCadastroDTO()));
+		return ResponseEntity.status(HttpStatus.OK).body(emprestimoService.save(emprestimoCadastroDTO));
 	}
 }

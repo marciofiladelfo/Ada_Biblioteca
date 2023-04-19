@@ -8,16 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
 public class EmprestimoCadastroDTO {
 
     private ClienteCadastroDTO cliente;
-    private LivroCadastroDto livro;
-    
-	public Emprestimo toCadastroDTO() {
-		ModelMapper mapper = new ModelMapper();
-		return mapper.map(this, Emprestimo.class);
-	}
+    private List<LivroCadastroDto> livros;
 }

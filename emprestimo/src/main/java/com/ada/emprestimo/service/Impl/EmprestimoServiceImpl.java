@@ -1,7 +1,10 @@
 package com.ada.emprestimo.service.Impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import com.ada.emprestimo.dtos.LivroCadastroDto;
+import com.ada.emprestimo.util.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,18 +29,23 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	LivroService livroService;
 
 	@Override
-	public EmprestimoCadastroDTO save(Emprestimo emprestimo) {
+	public EmprestimoCadastroDTO save(EmprestimoCadastroDTO emprestimoCadastroDTO) {
 
-		Cliente cliente = clienteService.getOne(emprestimo.getCliente().getId());
+		Emprestimo emprestimo = new Emprestimo();
+		emprestimo.setLivros(new ArrayList<>());
+
+		Cliente cliente = clienteService.getOne(emprestimoCadastroDTO.getCliente().getId());
 		emprestimo.setCliente(cliente);
 
-		Livro livro = livroService.getOne(emprestimo.getLivro().getId());
-		emprestimo.setLivro(livro);
+		for (LivroCadastroDto livroEmprestimo: emprestimoCadastroDTO.getLivros()) {
+			Livro livro = livroService.getOne(livroEmprestimo.getId());
+			emprestimo.getLivros().add(livro);
+		}
 
 		emprestimo.setDataEmprestimo(LocalDate.now());
 		emprestimo.setDataDevolucao(emprestimo.getDataEmprestimo().plusDays(5));
 		emprestimo.setQuantidade(1);
-		emprestimo.setStatus("Emprestado");
+		emprestimo.setStatus(Status.EMPRESTADO.getStatus());
 		emprestimo.setProtocolo(1231223345);
 
 		return emprestimoRepository.save(emprestimo).toResponse();

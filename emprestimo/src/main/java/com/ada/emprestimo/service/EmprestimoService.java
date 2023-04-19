@@ -5,5 +5,5 @@ import com.ada.emprestimo.model.Emprestimo;
 
 public interface EmprestimoService {
 	
-	public EmprestimoCadastroDTO save(Emprestimo emprestimo);
+	public EmprestimoCadastroDTO save(EmprestimoCadastroDTO emprestimoCadastroDTO);
 }

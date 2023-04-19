@@ -1,15 +1,10 @@
 package com.ada.emprestimo.model;
 
+import jakarta.persistence.*;
 import org.modelmapper.ModelMapper;
 
 import com.ada.emprestimo.dtos.LivroCadastroDto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,9 +26,9 @@ public class Livro {
     private String descricao;
 	@Column(name = "quantidade_livro")
     private Integer quantidade;
-	
-    @ManyToOne
-    @JoinColumn(name = "id_emprestimo")
+
+    @ManyToOne()
+	@JoinColumn(name = "id_emprestimo")
     private Emprestimo emprestimo;
 	
 	public LivroCadastroDto toLivroCadastroDto() {												
