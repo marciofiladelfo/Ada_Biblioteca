@@ -2,7 +2,7 @@
 ### Cliente
 
 Resumo Geral do projeto.
-Esta API Rest é responsável por gerir toda a entidade cliente.
+Esta API Rest é responsável por gerir toda a entidade clienteDto.
 
 ### Getting Started
 
@@ -44,8 +44,8 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 - API: Cliente
 - End Point URL Path:  /clientes
 - Method: POST
-- Objetivo: Cadastrar todas as informações necessárias para identificação de um cliente.
-- Descrição: Este método é responsável por cadastrar cliente.
+- Objetivo: Cadastrar todas as informações necessárias para identificação de um clienteDto.
+- Descrição: Este método é responsável por cadastrar clienteDto.
 
 1.1 - JSON Request de exemplo:
 ```
@@ -74,7 +74,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 2.1 - JSON Response de exemplo:
 ```
 {
-	"cliente": [
+	"clienteDto": [
 		{
 			"nome": "Milena Dias",
 			"contato": "11-94444-4444",
@@ -92,11 +92,11 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 	]
 }
 ```
-3 – Alterar cliente por id
-- API: /cliente
-- End Point URL Path:  cliente/{id}
+3 – Alterar clienteDto por id
+- API: /clienteDto
+- End Point URL Path:  clienteDto/{id}
 - Method: PUT
-- Objetivo: Alterar informações especificas de um determinado cliente.
+- Objetivo: Alterar informações especificas de um determinado clienteDto.
 - Descrição: Este método é responsável alterar informações de um determinado id.
 
 3.1 - Parametros Request de exemplo:
@@ -119,10 +119,10 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1
 201 - CREATED
 ```
 4 – Deletar livro por id
-- API: /cliente
-- End Point URL Path:  cliente/{id}
+- API: /clienteDto
+- End Point URL Path:  clienteDto/{id}
 - Method: Delete
-- Objetivo: deletar informações especificas de um determinado cliente.
+- Objetivo: deletar informações especificas de um determinado clienteDto.
 - Descrição: Este método é responsável deletar informações de um determinado id.
 
 4.1 - Parametros Request de exemplo:

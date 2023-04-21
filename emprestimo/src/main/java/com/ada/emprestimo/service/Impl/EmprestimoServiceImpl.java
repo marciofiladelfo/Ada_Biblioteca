@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ada.emprestimo.dtos.EmprestimoCadastroDTO;
 import com.ada.emprestimo.dtos.LivroCadastroDto;
-import com.ada.emprestimo.model.Cliente;
+import com.ada.emprestimo.model.dto.ClienteDto;
 import com.ada.emprestimo.model.Emprestimo;
 import com.ada.emprestimo.model.Livro;
 import com.ada.emprestimo.repository.EmprestimoRepository;
@@ -35,8 +35,8 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		Emprestimo emprestimo = new Emprestimo();
 		emprestimo.setLivros(new ArrayList<>());
 
-		Cliente cliente = clienteService.getOne(emprestimoCadastroDTO.getCliente().getId());
-		emprestimo.setCliente(cliente);
+		ClienteDto clienteDto = clienteService.retornaDadosCliente(emprestimoCadastroDTO.getCliente().getIdCliente());
+		emprestimo.setIdCliente(clienteDto.getId());
 
 		for (LivroCadastroDto livroEmprestimo: emprestimoCadastroDTO.getLivros()) {
 			Livro livro = livroService.getOne(livroEmprestimo.getId());
@@ -53,7 +53,6 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	}
 	
 	public List<Emprestimo> getAll() {
-		
 		return emprestimoRepository.findAll();
 	}
 }

@@ -43,7 +43,7 @@ public class livroController {
 	}
 	
 	@PutMapping("{id}")
-	public Livro update(@PathVariable int id, @RequestBody Livro livro) {
+	public Livro updateLivro(@PathVariable int id, @RequestBody Livro livro) {
 		return livroService.update(id, livro);
 	}
 	
@@ -53,7 +53,7 @@ public class livroController {
 	}
 	
 	@PatchMapping("{id}")
-	public ResponseEntity<EstoqueDto> update(@PathVariable int id, @RequestHeader int tipoTransacao, @RequestBody EstoqueDto estoqueDto) {
+	public ResponseEntity<EstoqueDto> updateEstoque(@PathVariable int id, @RequestHeader int tipoTransacao, @RequestBody EstoqueDto estoqueDto) {
 		return ResponseEntity.status(HttpStatus.OK).body(livroService.updateEstoque(id, tipoTransacao, estoqueDto.toModelEstoque()));
 	}
 }

@@ -32,10 +32,7 @@ public class Emprestimo {
     private Integer quantidade;
     private String status;
 	private Integer protocolo;
-
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
+    private Integer idCliente;
 
 	@OneToMany(mappedBy = "emprestimo")
 	private List<Livro> livros;

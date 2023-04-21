@@ -1,8 +1,7 @@
 package com.ada.emprestimo.dtos;
 
+import com.ada.emprestimo.model.dto.ClienteDto;
 import org.modelmapper.ModelMapper;
-
-import com.ada.emprestimo.model.Cliente;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 																							//Inclui os construtores com todos os paramentros
 @NoArgsConstructor 
 public class ClienteCadastroDTO {
-	private Integer id;
+	private Integer idCliente;
 	
-	public Cliente toModelEstoque() {											// Ele irá converter apenas os ATRIBUTOS em COMUM das CLASSES
+	public ClienteDto toModelEstoque() {											// Ele irá converter apenas os ATRIBUTOS em COMUM das CLASSES
 		ModelMapper mapper = new ModelMapper();
-		return mapper.map(this, Cliente.class);
+		return mapper.map(this, ClienteDto.class);
 	}
 }

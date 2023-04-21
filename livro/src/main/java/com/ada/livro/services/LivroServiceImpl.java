@@ -50,7 +50,7 @@ public class LivroServiceImpl implements LivroService {
 			if(tipoTransacao == 1) {
 				livroBD.setQuantidade(livroBD.getQuantidade() + livro.getQuantidade());
 			}
-			else {
+			else if(tipoTransacao == 2){
 				livroBD.setQuantidade(livroBD.getQuantidade() - livro.getQuantidade());
 			}
 			return livroRepository.save(livroBD).toDTOEstoque();

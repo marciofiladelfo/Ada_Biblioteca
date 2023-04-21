@@ -1,9 +1,7 @@
 package com.ada.emprestimo.service;
 
-import com.ada.emprestimo.model.Cliente;
+import com.ada.emprestimo.model.dto.ClienteDto;
 
 public interface ClienteService {
-	public Cliente retornaDadosCliente(int idCliente);
-	public Cliente getOne(int id);
-	public Cliente save(Cliente dadosCliente);
+	ClienteDto retornaDadosCliente(int idCliente);
 }
