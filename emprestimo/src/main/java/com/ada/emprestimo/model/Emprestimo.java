@@ -1,13 +1,11 @@
 package com.ada.emprestimo.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.ada.emprestimo.model.dto.LivroDto;
 import jakarta.persistence.*;
 import org.modelmapper.ModelMapper;
 
-import com.ada.emprestimo.dtos.EmprestimoCadastroDTO;
+import com.ada.emprestimo.request.EmprestimoCadastroDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;

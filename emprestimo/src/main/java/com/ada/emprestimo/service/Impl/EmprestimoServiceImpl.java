@@ -1,7 +1,6 @@
 package com.ada.emprestimo.service.Impl;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,8 +9,8 @@ import com.ada.emprestimo.repository.EmprestimoLivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ada.emprestimo.dtos.EmprestimoCadastroDTO;
-import com.ada.emprestimo.dtos.LivroCadastroDto;
+import com.ada.emprestimo.request.EmprestimoCadastroDTO;
+import com.ada.emprestimo.request.LivroCadastroDto;
 import com.ada.emprestimo.model.dto.ClienteDto;
 import com.ada.emprestimo.model.Emprestimo;
 import com.ada.emprestimo.model.dto.LivroDto;

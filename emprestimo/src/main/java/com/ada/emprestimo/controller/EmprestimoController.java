@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ada.emprestimo.dtos.EmprestimoCadastroDTO;
+import com.ada.emprestimo.request.EmprestimoCadastroDTO;
 import com.ada.emprestimo.model.Emprestimo;
 import com.ada.emprestimo.service.EmprestimoService;
 
