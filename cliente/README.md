@@ -118,7 +118,7 @@ PathParams: cliente_Id (CDPROD): path param (cliente_Id) value=1
 ```
 201 - CREATED
 ```
-4 – Deletar livro por id
+4 – Deletar livroDto por id
 - API: /clienteDto
 - End Point URL Path:  clienteDto/{id}
 - Method: Delete

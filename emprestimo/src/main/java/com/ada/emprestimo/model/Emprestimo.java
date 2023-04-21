@@ -3,6 +3,7 @@ package com.ada.emprestimo.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.ada.emprestimo.model.dto.LivroDto;
 import jakarta.persistence.*;
 import org.modelmapper.ModelMapper;
 
@@ -31,11 +32,9 @@ public class Emprestimo {
 	@Column(name = "quantidade_emprestimo")
     private Integer quantidade;
     private String status;
+
 	private Integer protocolo;
     private Integer idCliente;
-
-	@OneToMany(mappedBy = "emprestimo")
-	private List<Livro> livros;
 
 	public EmprestimoCadastroDTO toResponse() {
 		ModelMapper mapper = new ModelMapper();

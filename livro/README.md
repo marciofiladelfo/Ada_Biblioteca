@@ -44,7 +44,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 - API: /livros
 - End Point URL Path:  /livros
 - Method: POST
-- Objetivo: Cadastrar todas as informações necessárias para identificação de um livro.
+- Objetivo: Cadastrar todas as informações necessárias para identificação de um livroDto.
 - Descrição: Este método é responsável por cadastrar livros
 
 1.1 - JSON Request de exemplo:
@@ -70,7 +70,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 - API: /livros
 - End Point URL Path:  /livros
 - Method: GET
-- Objetivo: reotornar lista com todas as informações de todos livro.
+- Objetivo: reotornar lista com todas as informações de todos livroDto.
 - Descrição: Este método é responsável por litar todos os livros
 
 2.1 - JSON Response de exemplo:
@@ -96,12 +96,12 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
     ]
 }
 ```
-3 – Listar livro por id
+3 – Listar livroDto por id
 
 - API: /livros
 - End Point URL Path:  livros/{id}
 - Method: GET
-- Objetivo: Listar informações especificas de um determinado livro.
+- Objetivo: Listar informações especificas de um determinado livroDto.
 - Descrição: Este método é responsável listar informações de um determinado id.
 
 3.1 - Parametros Request de exemplo:
@@ -124,12 +124,12 @@ PathParams: livro_Id (CDPROD): path param (livro_Id) value=1
 }
 ```
 
-4 – Alterar livro por id
+4 – Alterar livroDto por id
 
 - API: /livros
 - End Point URL Path:  livros/{id}
 - Method: PUT
-- Objetivo: Alterar informações especificas de um determinado livro.
+- Objetivo: Alterar informações especificas de um determinado livroDto.
 - Descrição: Este método é responsável alterar informações de um determinado id.
 
 4.1 - Parametros Request de exemplo:
@@ -156,12 +156,12 @@ PathParams: livro_Id (CDPROD): path param (livro_Id) value=1
 200 - OK
 ```
 
-5 – Deletar livro por id
+5 – Deletar livroDto por id
 
 - API: /livros
 - End Point URL Path:  livros/{id}
 - Method: Delete
-- Objetivo: deletar informações especificas de um determinado livro.
+- Objetivo: deletar informações especificas de um determinado livroDto.
 - Descrição: Este método é responsável deletar informações de um determinado id.
 
 5.1 - Parametros Request de exemplo:
@@ -178,12 +178,12 @@ PathParams: livro_id (CDPROD): path param (livro_id) value=1
 }
 ```
 
-6 – Gerenciar estoque livro por id
+6 – Gerenciar estoque livroDto por id
 
 - API: /livros
 - End Point URL Path:  livros/{id}/estoque
 - Method: PATCH
-- Objetivo: Alterar informações de quantidade de um determinado livro buscando pelo id.
+- Objetivo: Alterar informações de quantidade de um determinado livroDto buscando pelo id.
 - Descrição: Este método é responsável gerenciar estoque de um determinado id, assim que houver emprestimo ou devolutiva do mesmo.
 
 6.1 - Parametros Request de exemplo:

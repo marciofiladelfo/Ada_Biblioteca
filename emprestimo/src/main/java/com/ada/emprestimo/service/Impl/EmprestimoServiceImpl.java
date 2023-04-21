@@ -3,7 +3,10 @@ package com.ada.emprestimo.service.Impl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import com.ada.emprestimo.model.EmprestimoLivro;
+import com.ada.emprestimo.repository.EmprestimoLivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +14,7 @@ import com.ada.emprestimo.dtos.EmprestimoCadastroDTO;
 import com.ada.emprestimo.dtos.LivroCadastroDto;
 import com.ada.emprestimo.model.dto.ClienteDto;
 import com.ada.emprestimo.model.Emprestimo;
-import com.ada.emprestimo.model.Livro;
+import com.ada.emprestimo.model.dto.LivroDto;
 import com.ada.emprestimo.repository.EmprestimoRepository;
 import com.ada.emprestimo.service.ClienteService;
 import com.ada.emprestimo.service.EmprestimoService;
@@ -24,32 +27,47 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	EmprestimoRepository emprestimoRepository;
 
 	@Autowired
+	EmprestimoLivroRepository emprestimoLivroRepository;
+
+	@Autowired
 	ClienteService clienteService;
 
 	@Autowired
 	LivroService livroService;
 
 	@Override
-	public EmprestimoCadastroDTO save(EmprestimoCadastroDTO emprestimoCadastroDTO) {
+	public Emprestimo save(EmprestimoCadastroDTO emprestimoCadastroDTO) {
 
 		Emprestimo emprestimo = new Emprestimo();
-		emprestimo.setLivros(new ArrayList<>());
 
 		ClienteDto clienteDto = clienteService.retornaDadosCliente(emprestimoCadastroDTO.getCliente().getIdCliente());
 		emprestimo.setIdCliente(clienteDto.getId());
-
-		for (LivroCadastroDto livroEmprestimo: emprestimoCadastroDTO.getLivros()) {
-			Livro livro = livroService.getOne(livroEmprestimo.getId());
-			emprestimo.getLivros().add(livro);
-		}
 
 		emprestimo.setDataEmprestimo(LocalDate.now());
 		emprestimo.setDataDevolucao(emprestimo.getDataEmprestimo().plusDays(5));
 		emprestimo.setQuantidade(1);
 		emprestimo.setStatus(Status.EMPRESTADO.getStatus());
-		emprestimo.setProtocolo(1231223345);
+		emprestimo.setProtocolo(numberRandom());
 
-		return emprestimoRepository.save(emprestimo).toResponse();
+		for (LivroCadastroDto livroEmprestimo: emprestimoCadastroDTO.getLivros()) {
+			EmprestimoLivro emprestimoLivro = new EmprestimoLivro();
+			LivroDto livroDto = livroService.retornaDadosLivro(livroEmprestimo.getIdLivros());
+			emprestimoLivro.setIdLivros(livroDto.getId());
+			emprestimoLivro.setProtocolo(emprestimo.getProtocolo());
+			emprestimoLivroRepository.save(emprestimoLivro);
+		}
+
+		return emprestimoRepository.save(emprestimo);
+	}
+
+	private Integer numberRandom(){
+		Random gerador = new Random();
+
+		//imprime sequência de 10 números inteiros aleatórios
+//		for (int i = 0; i < 10; i++) {
+//			gerador.nextInt();
+//		}
+		return gerador.nextInt();
 	}
 	
 	public List<Emprestimo> getAll() {

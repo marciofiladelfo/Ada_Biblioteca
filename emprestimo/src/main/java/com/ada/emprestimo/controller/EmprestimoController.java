@@ -22,9 +22,9 @@ public class EmprestimoController {
 	private EmprestimoService emprestimoService;
 
 	@PostMapping()
-	public ResponseEntity<EmprestimoCadastroDTO> save(@RequestBody EmprestimoCadastroDTO emprestimoCadastroDTO) {
-
-		return ResponseEntity.status(HttpStatus.OK).body(emprestimoService.save(emprestimoCadastroDTO));
+	public ResponseEntity<Integer> save(@RequestBody EmprestimoCadastroDTO emprestimoCadastroDTO) {
+		Emprestimo emprestimo = emprestimoService.save(emprestimoCadastroDTO);
+		return ResponseEntity.status(HttpStatus.OK).body(emprestimo.getProtocolo());
 	}
 	
 	@GetMapping("")

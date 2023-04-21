@@ -1,9 +1,7 @@
 package com.ada.emprestimo.service;
 
-import com.ada.emprestimo.model.Livro;
+import com.ada.emprestimo.model.dto.LivroDto;
 
 public interface LivroService {
-	public Livro retornaDadosLivro(int idLivro);
-	public Livro getOne(int id);
-	public Livro save(Livro dadosLivro);
+	LivroDto retornaDadosLivro(int idLivro);
 }
