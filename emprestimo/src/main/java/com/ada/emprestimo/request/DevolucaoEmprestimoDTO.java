@@ -1,16 +1,15 @@
 package com.ada.emprestimo.request;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmprestimoCadastroDTO {
-
+public class DevolucaoEmprestimoDTO {
     private ClienteCadastroDTO cliente;
     private List<LivroCadastroDto> livros;
+
 }

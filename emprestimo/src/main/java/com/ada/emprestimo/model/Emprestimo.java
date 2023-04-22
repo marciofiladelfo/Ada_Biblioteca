@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import jakarta.persistence.*;
 import org.modelmapper.ModelMapper;
 
+import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
 import com.ada.emprestimo.request.EmprestimoCadastroDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -37,6 +38,12 @@ public class Emprestimo {
 	public EmprestimoCadastroDTO toResponse() {
 		ModelMapper mapper = new ModelMapper();
 		EmprestimoCadastroDTO dto = mapper.map(this, EmprestimoCadastroDTO.class);
+		return dto;
+	}
+	
+	public DevolucaoEmprestimoDTO toRequest() {
+		ModelMapper mapper = new ModelMapper();
+		DevolucaoEmprestimoDTO dto = mapper.map(this, DevolucaoEmprestimoDTO.class);
 		return dto;
 	}
 }

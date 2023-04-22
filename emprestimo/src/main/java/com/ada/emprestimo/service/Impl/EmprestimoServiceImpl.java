@@ -2,24 +2,26 @@ package com.ada.emprestimo.service.Impl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
-import com.ada.emprestimo.model.EmprestimoLivro;
-import com.ada.emprestimo.repository.EmprestimoLivroRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ada.emprestimo.model.Emprestimo;
+import com.ada.emprestimo.model.EmprestimoLivro;
+import com.ada.emprestimo.model.dto.ClienteDto;
+import com.ada.emprestimo.model.dto.LivroDto;
+import com.ada.emprestimo.repository.EmprestimoLivroRepository;
+import com.ada.emprestimo.repository.EmprestimoRepository;
+import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
 import com.ada.emprestimo.request.EmprestimoCadastroDTO;
 import com.ada.emprestimo.request.LivroCadastroDto;
-import com.ada.emprestimo.model.dto.ClienteDto;
-import com.ada.emprestimo.model.Emprestimo;
-import com.ada.emprestimo.model.dto.LivroDto;
-import com.ada.emprestimo.repository.EmprestimoRepository;
 import com.ada.emprestimo.service.ClienteService;
 import com.ada.emprestimo.service.EmprestimoService;
 import com.ada.emprestimo.service.LivroService;
 import com.ada.emprestimo.util.Status;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -65,6 +67,32 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return protocolo;
 	}
 
+	public Emprestimo devolucao(DevolucaoEmprestimoDTO devolucaoEmprestimoDTO) {
+		Optional<Emprestimo> optionalEmprestimo = emprestimoRepository.findByIdClienteAndStatus(devolucaoEmprestimoDTO.getCliente().getIdCliente(), Status.EMPRESTADO.getStatus());
+		if (optionalEmprestimo.isPresent()){
+			Emprestimo emprestimoBD = optionalEmprestimo.get();
+			emprestimoBD.setStatus(Status.DEVOLVIDO.toString());
+			emprestimoRepository.save(emprestimoBD);
+		}
+//		int protocolo = emprestimo.getProtocolo();
+		
+		for (LivroCadastroDto livroEmprestimo: devolucaoEmprestimoDTO.getLivros()) {
+			Emprestimo emprestimoBD = optionalEmprestimo.get();
+			int idLivro = livroEmprestimo.getIdLivros();
+			Optional<EmprestimoLivro> optionalEmprestimoLivro = emprestimoLivroRepository.findByIdLivrosAndProtocolo(idLivro, emprestimoBD.getProtocolo());
+			if (optionalEmprestimoLivro.isPresent()){
+				EmprestimoLivro emprestimoLivro = optionalEmprestimoLivro.get();
+				int idLivroEmprestimo = emprestimoLivro.getId();
+				emprestimoLivroRepository.deleteById(idLivroEmprestimo);
+				
+			}
+			System.out.println(idLivro);
+		}
+		return optionalEmprestimo.get();
+		
+	}
+	
+	
 	public List<Emprestimo> getAll() {
 		return emprestimoRepository.findAll();
 	}
