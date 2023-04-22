@@ -1,8 +1,7 @@
 package com.ada.livro.model;
 
+import com.ada.livro.dto.response.EstoqueResponse;
 import org.modelmapper.ModelMapper;
-
-import com.ada.livro.dtos.EstoqueDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,9 +28,9 @@ public class Livro {
     private String descricao;
     private Integer quantidade;
     
-	public EstoqueDto toDTOEstoque() {												// Ele irá converter apenas os ATRIBUTOS em COMUM das CLASSES
+	public EstoqueResponse toDTOEstoque() {												// Ele irá converter apenas os ATRIBUTOS em COMUM das CLASSES
 		ModelMapper mapper = new ModelMapper();
-		EstoqueDto dto = mapper.map(this, EstoqueDto.class);
+		EstoqueResponse dto = mapper.map(this, EstoqueResponse.class);
 		return dto;
 	}
 

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.ada.emprestimo.model.EmprestimoLivro;
 import com.ada.emprestimo.repository.EmprestimoLivroRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +20,15 @@ import com.ada.emprestimo.service.ClienteService;
 import com.ada.emprestimo.service.EmprestimoService;
 import com.ada.emprestimo.service.LivroService;
 import com.ada.emprestimo.util.Status;
+
 @Service
-
+@RequiredArgsConstructor
 public class EmprestimoServiceImpl implements EmprestimoService {
-	@Autowired
-	EmprestimoRepository emprestimoRepository;
 
-	@Autowired
-	EmprestimoLivroRepository emprestimoLivroRepository;
-
-	@Autowired
-	ClienteService clienteService;
-
-	@Autowired
-	LivroService livroService;
+	private final EmprestimoRepository emprestimoRepository;
+    private final EmprestimoLivroRepository emprestimoLivroRepository;
+    private final ClienteService clienteService;
+    private final LivroService livroService;
 
 	@Override
 	public Emprestimo save(EmprestimoCadastroDTO emprestimoCadastroDTO) {
@@ -46,7 +42,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		emprestimo.setDataDevolucao(emprestimo.getDataEmprestimo().plusDays(5));
 		emprestimo.setQuantidade(1);
 		emprestimo.setStatus(Status.EMPRESTADO.getStatus());
-		emprestimo.setProtocolo(numberRandom());
+		emprestimo.setProtocolo(numberProtocol());
 
 		for (LivroCadastroDto livroEmprestimo: emprestimoCadastroDTO.getLivros()) {
 			EmprestimoLivro emprestimoLivro = new EmprestimoLivro();
@@ -59,16 +55,16 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return emprestimoRepository.save(emprestimo);
 	}
 
-	private Integer numberRandom(){
+	private Integer numberProtocol(){
 		Random gerador = new Random();
-
-		//imprime sequência de 10 números inteiros aleatórios
-//		for (int i = 0; i < 10; i++) {
-//			gerador.nextInt();
-//		}
-		return gerador.nextInt();
+		var protocolo = gerador.nextInt();
+		if( protocolo <= 0){
+			protocolo = protocolo * (-1);
+			return protocolo;
+		}
+		return protocolo;
 	}
-	
+
 	public List<Emprestimo> getAll() {
 		return emprestimoRepository.findAll();
 	}

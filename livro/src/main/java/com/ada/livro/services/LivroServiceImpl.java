@@ -1,65 +1,70 @@
 package com.ada.livro.services;
 
+import com.ada.livro.dto.response.EstoqueResponse;
+import com.ada.livro.exception.NotFoundException;
+import com.ada.livro.model.Livro;
+import com.ada.livro.repositories.LivroRepository;
+import com.ada.livro.util.Status;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.ada.livro.dtos.EstoqueDto;
-import com.ada.livro.model.Livro;
-import com.ada.livro.repositories.LivroRepository;
+import static com.ada.livro.util.Status.DEVOLVIDO;
+import static com.ada.livro.util.Status.EMPRESTADO;
 
 @Service
+@RequiredArgsConstructor
 public class LivroServiceImpl implements LivroService {
-	@Autowired
-	LivroRepository livroRepository;
 
-	@Override
-	public Livro save(Livro livro) {
-		return livroRepository.save(livro);
-	}
+    private final LivroRepository livroRepository;
 
-	@Override
-	public List<Livro> getAll(){
-		return livroRepository.findAll();
-	}
+    @Override
+    public Livro save(Livro livro) {
+        return livroRepository.save(livro);
+    }
 
-	@Override
-	public Livro getOne(int id) {
-		return livroRepository.findById(id).orElse(new Livro());
-	}
+    @Override
+    public List<Livro> getAll() {
+        return livroRepository.findAll();
+    }
 
-	@Override
-	public Livro update(int id, Livro livro) {
-		Optional<Livro> optional = livroRepository.findById(id);
-		if (optional.isPresent()){
-			Livro livroBD = optional.get();
+    @Override
+    public Optional<Livro> getById(int id) {
+        return Optional.ofNullable(livroRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("validation.livro.notfound", id)
+        ));
+    }
 
-			return livroRepository.save(livroBD);
-		}
-		return new Livro();
-	}
+    @Override
+    public Livro update(int id, Livro livro) {
+        Optional<Livro> optional = livroRepository.findById(id);
+        if (optional.isPresent()) {
+            Livro livroBD = optional.get();
+            return livroRepository.save(livroBD);
+        }
+        return new Livro();
+    }
 
-	@Override
-	public EstoqueDto updateEstoque(int id, int tipoTransacao, Livro livro) {
+    @Override
+    public EstoqueResponse updateEstoque(int id, Status tipoTransacao, Livro livro) {
 
-		Optional<Livro> optional = livroRepository.findById(id);
-		if (optional.isPresent()){
-			Livro livroBD = optional.get();
-			if(tipoTransacao == 1) {
-				livroBD.setQuantidade(livroBD.getQuantidade() + livro.getQuantidade());
-			}
-			else if(tipoTransacao == 2){
-				livroBD.setQuantidade(livroBD.getQuantidade() - livro.getQuantidade());
-			}
-			return livroRepository.save(livroBD).toDTOEstoque();
-		}
-		return new Livro().toDTOEstoque();
-	}
+        Optional<Livro> optional = livroRepository.findById(id);
+        if (optional.isPresent()) {
+            Livro livroBD = optional.get();
+            if (tipoTransacao == DEVOLVIDO) {
+                livroBD.setQuantidade(livroBD.getQuantidade() + livro.getQuantidade());
+            } else if (tipoTransacao == EMPRESTADO) {
+                livroBD.setQuantidade(livroBD.getQuantidade() - livro.getQuantidade());
+            }
+            return livroRepository.save(livroBD).toDTOEstoque();
+        }
+        return new Livro().toDTOEstoque();
+    }
 
-	@Override
-	public void delete(int id) {
-		livroRepository.deleteById(id);
-	}
+    @Override
+    public void delete(int id) {
+        livroRepository.deleteById(id);
+    }
 }

@@ -1,7 +1,8 @@
 package com.ada.emprestimo.util;
 
 public enum Status {
-    EMPRESTADO("Emprestado");
+    EMPRESTADO("Emprestado"),
+    DEVOLVIDO("Devolvido");
 
     private final String status;
 

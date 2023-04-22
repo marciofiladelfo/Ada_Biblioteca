@@ -6,7 +6,6 @@ import com.ada.emprestimo.request.EmprestimoCadastroDTO;
 import com.ada.emprestimo.model.Emprestimo;
 
 public interface EmprestimoService {
-	
-	public Emprestimo save(EmprestimoCadastroDTO emprestimoCadastroDTO);
-	public List<Emprestimo> getAll();
+	Emprestimo save(EmprestimoCadastroDTO emprestimoCadastroDTO);
+	List<Emprestimo> getAll();
 }
