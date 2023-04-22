@@ -35,7 +35,7 @@ public class EmprestimoController {
 	}
 	
 	@PatchMapping("devolucao")
-	public ResponseEntity<Integer> updateEstoque(@RequestBody DevolucaoEmprestimoDTO devolucaoEmprestimoDTO) {
+	public ResponseEntity<Integer> devolucao(@RequestBody DevolucaoEmprestimoDTO devolucaoEmprestimoDTO) {
 		emprestimoService.devolucao(devolucaoEmprestimoDTO);
 		return  ResponseEntity.status(HttpStatus.CREATED).build();
 	}
