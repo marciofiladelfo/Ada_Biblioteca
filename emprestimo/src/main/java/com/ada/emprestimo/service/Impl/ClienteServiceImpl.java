@@ -1,6 +1,6 @@
 package com.ada.emprestimo.service.Impl;
 
-import com.ada.emprestimo.model.dto.ClienteDto;
+import com.ada.emprestimo.dto.ClienteDto;
 import com.ada.emprestimo.service.ClienteService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

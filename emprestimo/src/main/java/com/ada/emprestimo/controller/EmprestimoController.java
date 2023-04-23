@@ -1,17 +1,16 @@
 package com.ada.emprestimo.controller;
 
-import java.util.List;
-
-import com.ada.emprestimo.dtos.response.ClienteEmprestimoResponseDTO;
+import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
+import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
+import com.ada.emprestimo.dto.response.ClienteEmprestimoResponseDTO;
+import com.ada.emprestimo.model.Emprestimo;
+import com.ada.emprestimo.service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ada.emprestimo.model.Emprestimo;
-import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
-import com.ada.emprestimo.request.EmprestimoCadastroDTO;
-import com.ada.emprestimo.service.EmprestimoService;
+import java.util.List;
 
 @RestController
 @RequestMapping("emprestimos")
@@ -26,8 +25,9 @@ public class EmprestimoController {
     }
 
     @GetMapping("")
-    public List<Emprestimo> getAll() {
-        return emprestimoService.getAll();
+    public ResponseEntity<List<Emprestimo>> getAll() {
+        var allEmprestimos = emprestimoService.getAll();
+        return ResponseEntity.ok(allEmprestimos);
     }
 
     @PatchMapping("devolucao")

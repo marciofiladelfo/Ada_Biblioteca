@@ -1,4 +1,4 @@
-package com.ada.emprestimo.dtos.response;
+package com.ada.emprestimo.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

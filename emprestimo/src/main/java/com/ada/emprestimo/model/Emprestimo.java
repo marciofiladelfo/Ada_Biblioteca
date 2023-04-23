@@ -2,11 +2,12 @@ package com.ada.emprestimo.model;
 
 import java.time.LocalDate;
 
+import com.ada.emprestimo.dto.request.EmprestimoPendenteDevolucaoDTO;
 import jakarta.persistence.*;
 import org.modelmapper.ModelMapper;
 
-import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
-import com.ada.emprestimo.request.EmprestimoCadastroDTO;
+import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
+import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -41,9 +42,15 @@ public class Emprestimo {
 		return dto;
 	}
 	
-	public DevolucaoEmprestimoDTO toRequest() {
+	public DevolucaoEmprestimoDTO toRequestDevolucao() {
 		ModelMapper mapper = new ModelMapper();
 		DevolucaoEmprestimoDTO dto = mapper.map(this, DevolucaoEmprestimoDTO.class);
+		return dto;
+	}
+
+	public EmprestimoPendenteDevolucaoDTO toRequestPendenteDevolucao() {
+		ModelMapper mapper = new ModelMapper();
+		EmprestimoPendenteDevolucaoDTO dto = mapper.map(this, EmprestimoPendenteDevolucaoDTO.class);
 		return dto;
 	}
 }

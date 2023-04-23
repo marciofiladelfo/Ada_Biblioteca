@@ -1,12 +1,13 @@
 package com.ada.emprestimo.service;
 
+import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
+import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
+import com.ada.emprestimo.dto.response.ClienteEmprestimoResponseDTO;
+import com.ada.emprestimo.model.Emprestimo;
+import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 
-import com.ada.emprestimo.dtos.response.ClienteEmprestimoResponseDTO;
-import com.ada.emprestimo.model.Emprestimo;
-import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
-import com.ada.emprestimo.request.EmprestimoCadastroDTO;
-import org.springframework.http.ResponseEntity;
 
 public interface EmprestimoService {
 	Emprestimo save(EmprestimoCadastroDTO emprestimoCadastroDTO);
