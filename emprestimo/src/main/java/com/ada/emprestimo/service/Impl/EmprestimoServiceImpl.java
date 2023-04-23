@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import com.ada.emprestimo.dtos.response.ClienteEmprestimoResponseDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ada.emprestimo.model.Emprestimo;
@@ -91,9 +93,15 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return optionalEmprestimo.get();
 		
 	}
-	
-	
+
+
 	public List<Emprestimo> getAll() {
 		return emprestimoRepository.findAll();
+	}
+
+	@Override
+	public ResponseEntity<ClienteEmprestimoResponseDTO> getEmprestimosByIdCliente(int idCliente) {
+		List<Emprestimo> emprestimos = emprestimoRepository.findByIdCliente(idCliente);
+		return null;
 	}
 }

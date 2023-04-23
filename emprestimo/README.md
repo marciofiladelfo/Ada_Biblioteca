@@ -73,7 +73,7 @@ Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
 2 – Listar livros do clienteDto
 
 - API: /emprestimo/
-- End Point URL Path:  /emprestimo/{idCliente}
+- End Point URL Path:  /emprestimos/{idCliente}
 - Method: GET
 - Objetivo: retornar lista com todas as informações de todos os livros que o clienteDto possui.
 - Descrição: Este método é responsável por listar todos os ivros que o clienteDto possui.
