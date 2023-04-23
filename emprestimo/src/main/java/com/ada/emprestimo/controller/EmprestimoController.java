@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ada.emprestimo.model.Emprestimo;
-import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
-import com.ada.emprestimo.request.EmprestimoCadastroDTO;
+import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
+import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
 import com.ada.emprestimo.service.EmprestimoService;
 
 @RestController
@@ -30,8 +30,9 @@ public class EmprestimoController {
 	}
 	
 	@GetMapping("")
-	public List<Emprestimo> getAll() {							
-		return emprestimoService.getAll();
+	public ResponseEntity<List<Emprestimo>> getAll() {
+		var allEmprestimos = emprestimoService.getAll();
+		return ResponseEntity.ok(allEmprestimos);
 	}
 	
 	@PatchMapping("devolucao")

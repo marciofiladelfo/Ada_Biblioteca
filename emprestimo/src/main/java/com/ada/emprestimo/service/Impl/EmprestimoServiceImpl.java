@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.ada.emprestimo.model.Emprestimo;
 import com.ada.emprestimo.model.EmprestimoLivro;
-import com.ada.emprestimo.model.dto.ClienteDto;
-import com.ada.emprestimo.model.dto.LivroDto;
+import com.ada.emprestimo.dto.ClienteDto;
+import com.ada.emprestimo.dto.LivroDto;
 import com.ada.emprestimo.repository.EmprestimoLivroRepository;
 import com.ada.emprestimo.repository.EmprestimoRepository;
-import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
-import com.ada.emprestimo.request.EmprestimoCadastroDTO;
-import com.ada.emprestimo.request.LivroCadastroDto;
+import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
+import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
+import com.ada.emprestimo.dto.request.LivroCadastroDto;
 import com.ada.emprestimo.service.ClienteService;
 import com.ada.emprestimo.service.EmprestimoService;
 import com.ada.emprestimo.service.LivroService;
@@ -74,7 +74,6 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 			emprestimoBD.setStatus(Status.DEVOLVIDO.toString());
 			emprestimoRepository.save(emprestimoBD);
 		}
-//		int protocolo = emprestimo.getProtocolo();
 		
 		for (LivroCadastroDto livroEmprestimo: devolucaoEmprestimoDTO.getLivros()) {
 			Emprestimo emprestimoBD = optionalEmprestimo.get();

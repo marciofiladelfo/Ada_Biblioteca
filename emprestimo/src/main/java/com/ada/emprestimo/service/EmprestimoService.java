@@ -1,13 +1,15 @@
 package com.ada.emprestimo.service;
 
+import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
+import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
+import com.ada.emprestimo.model.Emprestimo;
+
 import java.util.List;
 
-import com.ada.emprestimo.model.Emprestimo;
-import com.ada.emprestimo.request.DevolucaoEmprestimoDTO;
-import com.ada.emprestimo.request.EmprestimoCadastroDTO;
-
 public interface EmprestimoService {
-	Emprestimo save(EmprestimoCadastroDTO emprestimoCadastroDTO);
-	List<Emprestimo> getAll();
-	public Emprestimo devolucao(DevolucaoEmprestimoDTO devolucaoEmprestimoDTO);
+    Emprestimo save(EmprestimoCadastroDTO emprestimoCadastroDTO);
+
+    List<Emprestimo> getAll();
+
+    Emprestimo devolucao(DevolucaoEmprestimoDTO devolucaoEmprestimoDTO);
 }
