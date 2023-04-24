@@ -2,6 +2,7 @@ package com.ada.emprestimo.service.Impl;
 
 import com.ada.emprestimo.dto.LivroDto;
 import com.ada.emprestimo.service.LivroService;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -26,6 +27,7 @@ public class LivroServiceImpl implements LivroService {
                 .create(URL)
                 .get()
                 .uri(URI)
+                .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToFlux(LivroDto.class);
     }

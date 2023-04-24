@@ -70,7 +70,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 			emprestimoBD.setStatus(Status.DEVOLVIDO.toString());
 			emprestimoRepository.save(emprestimoBD);
 		}
-		
+
 		for (LivroCadastroDto livroEmprestimo: devolucaoEmprestimoDTO.getLivros()) {
 			Emprestimo emprestimoBD = optionalEmprestimo.get();
 			int idLivro = livroEmprestimo.getIdLivros();
@@ -79,12 +79,12 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 				EmprestimoLivro emprestimoLivro = optionalEmprestimoLivro.get();
 				int idLivroEmprestimo = emprestimoLivro.getId();
 				emprestimoLivroRepository.deleteById(idLivroEmprestimo);
-				
+
 			}
 			System.out.println(idLivro);
 		}
 		return optionalEmprestimo.get();
-		
+
 	}
 
 	public List<Emprestimo> getAll() {
@@ -134,7 +134,8 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 	@Override
 	public Flux<LivroDto> available() {
-		return livroService.livrosDisponiveis();
+		Flux<LivroDto> livroDtoFlux = livroService.livrosDisponiveis();
+		return livroDtoFlux.filter(livro -> livro.getQuantidade() > 0);
 	}
 
 	private Integer numberProtocol(){
