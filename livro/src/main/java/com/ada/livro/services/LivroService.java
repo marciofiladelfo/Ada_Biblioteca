@@ -14,7 +14,6 @@ public interface LivroService {
     List<Livro> getAll();
     Optional<Livro> getById(int id) throws NotFoundException;
     Livro update(int id, Livro livro);
-    EstoqueResponse updateEstoque(int id, Status tipoTransacao, Livro livro);
+    EstoqueResponse updateEstoque(int id, String tipoTransacao);
     void delete(int id);
-
 }

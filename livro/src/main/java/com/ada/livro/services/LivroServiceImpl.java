@@ -48,15 +48,15 @@ public class LivroServiceImpl implements LivroService {
     }
 
     @Override
-    public EstoqueResponse updateEstoque(int id, Status tipoTransacao, Livro livro) {
-
+    public EstoqueResponse updateEstoque(int id, String tipoTransacao) {
+    	int quantidade = 1;
         Optional<Livro> optional = livroRepository.findById(id);
         if (optional.isPresent()) {
             Livro livroBD = optional.get();
-            if (tipoTransacao == DEVOLVIDO) {
-                livroBD.setQuantidade(livroBD.getQuantidade() + livro.getQuantidade());
-            } else if (tipoTransacao == EMPRESTADO) {
-                livroBD.setQuantidade(livroBD.getQuantidade() - livro.getQuantidade());
+            if (tipoTransacao.equalsIgnoreCase(Status.DEVOLVIDO.getStatus())) {
+                livroBD.setQuantidade(livroBD.getQuantidade() + quantidade);
+            } else if (tipoTransacao.equalsIgnoreCase(Status.EMPRESTADO.getStatus())) {
+                livroBD.setQuantidade(livroBD.getQuantidade() - quantidade);
             }
             return livroRepository.save(livroBD).toDTOEstoque();
         }
