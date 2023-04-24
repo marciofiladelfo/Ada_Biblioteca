@@ -3,6 +3,7 @@ package com.ada.emprestimo.service.Impl;
 import com.ada.emprestimo.dto.LivroDto;
 import com.ada.emprestimo.dto.response.PendenteDevolucaoClienteResponse;
 import com.ada.emprestimo.dto.response.PendentesDevolucaoResponse;
+import com.ada.emprestimo.exception.NotFoundException;
 import com.ada.emprestimo.model.Emprestimo;
 import com.ada.emprestimo.model.EmprestimoLivro;
 import com.ada.emprestimo.repository.EmprestimoLivroRepository;
@@ -11,9 +12,11 @@ import com.ada.emprestimo.service.LivroPendenteDevolucaoService;
 import com.ada.emprestimo.service.LivroService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,15 +26,15 @@ public class LivroPendenteDevolucaoServiceImpl implements LivroPendenteDevolucao
     private final EmprestimoLivroRepository emprestimoLivroRepository;
     private final LivroService livroService;
 
-    public List<PendentesDevolucaoResponse> getPendentesDevolucao() {
+    public List<PendentesDevolucaoResponse> getPendentesDevolucao() throws NotFoundException {
 
         final List<Emprestimo> todayEmprestimo = emprestimoRepository.findByDataDevolucao();
         final List<EmprestimoLivro> emprestimoLivro = emprestimoLivroRepository.findAll();
-        final List<PendentesDevolucaoResponse> listaPendentes = new ArrayList<>();
+        final PendentesDevolucaoResponse pendente = new PendentesDevolucaoResponse();
 
-        emprestimoLivro.forEach(element -> {
+        final List<PendentesDevolucaoResponse> listaPendentes = emprestimoLivro.stream().map(element -> {
 
-            final PendentesDevolucaoResponse pendente = new PendentesDevolucaoResponse();
+
             final List<PendenteDevolucaoClienteResponse> listaClientesPendente = new ArrayList<>();
             LivroDto livroDto = livroService.retornaDadosLivro(element.getIdLivro());
 
@@ -49,10 +52,14 @@ public class LivroPendenteDevolucaoServiceImpl implements LivroPendenteDevolucao
                 }
             });
             pendente.setClientesPendenteDevolucao(listaClientesPendente);
-            listaPendentes.add(pendente);
-        });
+            return pendente;
+        }).collect(Collectors.toList());
 
-        return listaPendentes;
+        if (ObjectUtils.isEmpty(pendente.getClientesPendenteDevolucao())){
+            throw new NotFoundException();
+        }else{
+            return listaPendentes;
+        }
 
     }
 }
