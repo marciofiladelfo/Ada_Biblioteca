@@ -18,9 +18,9 @@ public class GetLivrosPendentesDevolucao {
 	private final LivroPendenteDevolucaoService service;
 
 	@GetMapping("/pendente")
-	public ResponseEntity<PendentesDevolucaoResponse> getPendenteDevolucao() {
+	public ResponseEntity<List<PendentesDevolucaoResponse>> getPendenteDevolucao() {
 		var allEmprestimosPendentes = service.getPendentesDevolucao();
-		return ResponseEntity.ok((PendentesDevolucaoResponse) allEmprestimosPendentes);
+		return ResponseEntity.ok(allEmprestimosPendentes);
 	}
 
 	

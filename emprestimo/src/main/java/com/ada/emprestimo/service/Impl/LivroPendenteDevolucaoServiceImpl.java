@@ -1,52 +1,57 @@
 package com.ada.emprestimo.service.Impl;
 
-import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
-import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
-import com.ada.emprestimo.dto.request.LivroCadastroDto;
+import com.ada.emprestimo.dto.LivroDto;
+import com.ada.emprestimo.dto.response.PendenteDevolucaoClienteResponse;
 import com.ada.emprestimo.dto.response.PendentesDevolucaoResponse;
 import com.ada.emprestimo.model.Emprestimo;
 import com.ada.emprestimo.model.EmprestimoLivro;
 import com.ada.emprestimo.repository.EmprestimoLivroRepository;
 import com.ada.emprestimo.repository.EmprestimoRepository;
 import com.ada.emprestimo.service.LivroPendenteDevolucaoService;
-import com.ada.emprestimo.util.Status;
+import com.ada.emprestimo.service.LivroService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class LivroPendenteDevolucaoServiceImpl implements LivroPendenteDevolucaoService {
 
     private final EmprestimoRepository emprestimoRepository;
+    private final EmprestimoLivroRepository emprestimoLivroRepository;
+    private final LivroService livroService;
 
     public List<PendentesDevolucaoResponse> getPendentesDevolucao() {
-        List<PendentesDevolucaoResponse> listaPendentes = new ArrayList<>();
-        List<Emprestimo> todayEmprestimo = emprestimoRepository.findByDataDevolucao();
-        todayEmprestimo.forEach(element -> {
-            PendentesDevolucaoResponse pendente = new PendentesDevolucaoResponse();
-            pendente.setIdLivro(element.toRequestPendenteDevolucao().getLivro().toModelLivro().getId());
-            pendente.setNome(element.toRequestPendenteDevolucao().getLivro().toModelLivro().getNome());
+
+        final List<Emprestimo> todayEmprestimo = emprestimoRepository.findByDataDevolucao();
+        final List<EmprestimoLivro> emprestimoLivro = emprestimoLivroRepository.findAll();
+        final List<PendentesDevolucaoResponse> listaPendentes = new ArrayList<>();
+
+        emprestimoLivro.forEach(element -> {
+
+            final PendentesDevolucaoResponse pendente = new PendentesDevolucaoResponse();
+            final List<PendenteDevolucaoClienteResponse> listaClientesPendente = new ArrayList<>();
+            LivroDto livroDto = livroService.retornaDadosLivro(element.getIdLivros());
+
+            todayEmprestimo.forEach(p -> {
+                if (element.getProtocolo().equals(p.getProtocolo())) {
+                    final PendenteDevolucaoClienteResponse clientesPendente = new PendenteDevolucaoClienteResponse();
+                    pendente.setIdLivro(livroDto.getId());
+                    pendente.setNome(livroDto.getNome());
+
+                    clientesPendente.setIdCliente(p.getIdCliente());
+                    clientesPendente.setDataEmprestimo(p.getDataEmprestimo());
+                    clientesPendente.setDataDevolucao(p.getDataDevolucao());
+                    listaClientesPendente.add(clientesPendente);
+
+                }
+            });
+            pendente.setClientesPendenteDevolucao(listaClientesPendente);
             listaPendentes.add(pendente);
         });
 
-//        for (LivroCadastroDto livroEmprestimo: devolucaoEmprestimoDTO.getLivros()) {
-//            Emprestimo emprestimoBD = optionalEmprestimo.get();
-//            int idLivro = livroEmprestimo.getIdLivros();
-//            Optional<EmprestimoLivro> optionalEmprestimoLivro = emprestimoLivroRepository.findByIdLivrosAndProtocolo(idLivro, emprestimoBD.getProtocolo());
-//            if (optionalEmprestimoLivro.isPresent()){
-//                EmprestimoLivro emprestimoLivro = optionalEmprestimoLivro.get();
-//                int idLivroEmprestimo = emprestimoLivro.getId();
-//                emprestimoLivroRepository.deleteById(idLivroEmprestimo);
-//
-//            }
-//            System.out.println(idLivro);
-//        }
         return listaPendentes;
 
     }
