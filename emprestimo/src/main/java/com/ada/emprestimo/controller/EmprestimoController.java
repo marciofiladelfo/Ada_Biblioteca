@@ -6,6 +6,7 @@ import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
 import com.ada.emprestimo.dto.response.ClienteEmprestimoResponseDTO;
 import com.ada.emprestimo.model.Emprestimo;
 import com.ada.emprestimo.service.EmprestimoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("emprestimos")
+@RequiredArgsConstructor
 public class EmprestimoController {
-    @Autowired
-    private EmprestimoService emprestimoService;
+
+    private final EmprestimoService emprestimoService;
 
     @PostMapping()
     public ResponseEntity<Integer> save(@RequestBody EmprestimoCadastroDTO emprestimoCadastroDTO) {

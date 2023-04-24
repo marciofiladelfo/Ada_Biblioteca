@@ -50,7 +50,7 @@ public class livroController {
     }
 
     @PatchMapping("/{id}/estoque")
-    public ResponseEntity<EstoqueResponse> updateEstoque(@PathVariable int id, @RequestHeader Status tipoTransacao, @RequestBody EstoqueRequest estoqueDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(livroService.updateEstoque(id, tipoTransacao, estoqueDto.toModelEstoque()));
+    public ResponseEntity<EstoqueResponse> updateEstoque(@PathVariable int id, @RequestHeader String tipoTransacao) {
+        return ResponseEntity.status(HttpStatus.OK).body(livroService.updateEstoque(id, tipoTransacao));
     }
 }
