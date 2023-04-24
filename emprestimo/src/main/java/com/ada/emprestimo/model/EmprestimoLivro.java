@@ -21,5 +21,5 @@ public class EmprestimoLivro {
     private Integer protocolo;
 
     @Column(name = "id_livro")
-    private Integer idLivros;
+    private Integer idLivro;
 }

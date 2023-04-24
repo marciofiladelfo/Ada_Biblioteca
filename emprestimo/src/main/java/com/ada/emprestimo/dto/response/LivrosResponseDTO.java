@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class LivrosResponseDTO {
     private String nome;
     private String autor;
-    private String editora;
+    private String categoria;
     private String descricao;
-    private String genero;
 }

@@ -33,7 +33,7 @@ public class LivroPendenteDevolucaoServiceImpl implements LivroPendenteDevolucao
 
             final PendentesDevolucaoResponse pendente = new PendentesDevolucaoResponse();
             final List<PendenteDevolucaoClienteResponse> listaClientesPendente = new ArrayList<>();
-            LivroDto livroDto = livroService.retornaDadosLivro(element.getIdLivros());
+            LivroDto livroDto = livroService.retornaDadosLivro(element.getIdLivro());
 
             todayEmprestimo.forEach(p -> {
                 if (element.getProtocolo().equals(p.getProtocolo())) {

@@ -1,11 +1,14 @@
 package com.ada.emprestimo.service.Impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 import com.ada.emprestimo.dto.response.ClienteEmprestimoResponseDTO;
+import com.ada.emprestimo.dto.response.EmprestimoResponseDTO;
+import com.ada.emprestimo.dto.response.LivrosResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +54,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		for (LivroCadastroDto livroEmprestimo: emprestimoCadastroDTO.getLivros()) {
 			EmprestimoLivro emprestimoLivro = new EmprestimoLivro();
 			LivroDto livroDto = livroService.retornaDadosLivro(livroEmprestimo.getIdLivros());
-			emprestimoLivro.setIdLivros(livroDto.getId());
+			emprestimoLivro.setIdLivro(livroDto.getId());
 			emprestimoLivro.setProtocolo(emprestimo.getProtocolo());
 			emprestimoLivroRepository.save(emprestimoLivro);
 		}
@@ -80,7 +83,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		for (LivroCadastroDto livroEmprestimo: devolucaoEmprestimoDTO.getLivros()) {
 			Emprestimo emprestimoBD = optionalEmprestimo.get();
 			int idLivro = livroEmprestimo.getIdLivros();
-			Optional<EmprestimoLivro> optionalEmprestimoLivro = emprestimoLivroRepository.findByIdLivrosAndProtocolo(idLivro, emprestimoBD.getProtocolo());
+			Optional<EmprestimoLivro> optionalEmprestimoLivro = emprestimoLivroRepository.findByIdLivroAndProtocolo(idLivro, emprestimoBD.getProtocolo());
 			if (optionalEmprestimoLivro.isPresent()){
 				EmprestimoLivro emprestimoLivro = optionalEmprestimoLivro.get();
 				int idLivroEmprestimo = emprestimoLivro.getId();
@@ -100,7 +103,42 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 	@Override
 	public ResponseEntity<ClienteEmprestimoResponseDTO> getEmprestimosByIdCliente(int idCliente) {
+		ClienteEmprestimoResponseDTO response = new ClienteEmprestimoResponseDTO();
+		List<EmprestimoResponseDTO> emprestimosResponse = new ArrayList<>();
+		EmprestimoResponseDTO emprestimoResponseDTO;
+
+		ClienteDto dadosCliente = clienteService.retornaDadosCliente(idCliente);
+		response.setNome(dadosCliente.getNome());
+		response.setContato(dadosCliente.getTelefone());
+		response.setEmail(dadosCliente.getEmail());
+		response.setIdade(dadosCliente.getIdade());
+		response.setEndereco(dadosCliente.getEndereco());
+
 		List<Emprestimo> emprestimos = emprestimoRepository.findByIdCliente(idCliente);
-		return null;
+		for (Emprestimo emprestimo : emprestimos) {
+			emprestimoResponseDTO = new EmprestimoResponseDTO();
+			emprestimoResponseDTO.setProtocoloEmprestimo(emprestimo.getProtocolo());
+			emprestimoResponseDTO.setDataEmprestimo(emprestimo.getDataEmprestimo());
+			emprestimoResponseDTO.setDataDevolucao(emprestimo.getDataDevolucao());
+
+			List<LivrosResponseDTO> livrosResponseDTO = new ArrayList<>();
+			LivrosResponseDTO livroResponseDTO;
+			Optional<List<EmprestimoLivro>> emprestimoLivro = emprestimoLivroRepository.findByProtocolo(emprestimo.getProtocolo());
+			if(emprestimoLivro.isPresent()){
+				for (EmprestimoLivro livro : emprestimoLivro.get()) {
+					livroResponseDTO = new LivrosResponseDTO();
+					LivroDto livroResponse = livroService.retornaDadosLivro(livro.getIdLivro());
+					livroResponseDTO.setNome(livroResponse.getNome());
+					livroResponseDTO.setAutor(livroResponse.getAutor());
+					livroResponseDTO.setDescricao(livroResponse.getDescricao());
+					livroResponseDTO.setCategoria(livroResponse.getCategoria());
+					livrosResponseDTO.add(livroResponseDTO);
+				}
+			}
+			emprestimoResponseDTO.setLivros(livrosResponseDTO);
+			emprestimosResponse.add(emprestimoResponseDTO);
+		}
+		response.setEmprestimos(emprestimosResponse);
+		return ResponseEntity.ok(response);
 	}
 }

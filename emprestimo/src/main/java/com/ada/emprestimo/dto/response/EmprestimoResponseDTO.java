@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmprestimoResponseDTO {
-    private String protocoloEmprestimo;
+    private Integer protocoloEmprestimo;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private List<LivrosResponseDTO> livros;
