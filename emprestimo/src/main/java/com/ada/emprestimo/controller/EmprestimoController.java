@@ -1,5 +1,6 @@
 package com.ada.emprestimo.controller;
 
+import com.ada.emprestimo.dto.LivroDto;
 import com.ada.emprestimo.dto.request.DevolucaoEmprestimoDTO;
 import com.ada.emprestimo.dto.request.EmprestimoCadastroDTO;
 import com.ada.emprestimo.dto.response.ClienteEmprestimoResponseDTO;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class EmprestimoController {
         return ResponseEntity.status(HttpStatus.OK).body(emprestimo.getProtocolo());
     }
 
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<List<Emprestimo>> getAll() {
         var allEmprestimos = emprestimoService.getAll();
         return ResponseEntity.ok(allEmprestimos);
@@ -40,4 +42,12 @@ public class EmprestimoController {
     public ResponseEntity<ClienteEmprestimoResponseDTO> getEmprestimosByIdCliente(@PathVariable final int idCliente) {
 		return emprestimoService.getEmprestimosByIdCliente(idCliente);
     }
+
+    @GetMapping("/disponiveis")
+    public ResponseEntity<Flux<LivroDto>> getAvailable() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(emprestimoService.available());
+    }
+
 }

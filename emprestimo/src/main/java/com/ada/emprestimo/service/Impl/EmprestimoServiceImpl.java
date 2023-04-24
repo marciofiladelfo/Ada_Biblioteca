@@ -27,6 +27,7 @@ import com.ada.emprestimo.service.LivroService;
 import com.ada.emprestimo.util.Status;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
@@ -62,16 +63,6 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return emprestimoRepository.save(emprestimo);
 	}
 
-	private Integer numberProtocol(){
-		Random gerador = new Random();
-		var protocolo = gerador.nextInt();
-		if( protocolo <= 0){
-			protocolo = protocolo * (-1);
-			return protocolo;
-		}
-		return protocolo;
-	}
-
 	public Emprestimo devolucao(DevolucaoEmprestimoDTO devolucaoEmprestimoDTO) {
 		Optional<Emprestimo> optionalEmprestimo = emprestimoRepository.findByIdClienteAndStatus(devolucaoEmprestimoDTO.getCliente().getIdCliente(), Status.EMPRESTADO.getStatus());
 		if (optionalEmprestimo.isPresent()){
@@ -95,7 +86,6 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return optionalEmprestimo.get();
 		
 	}
-
 
 	public List<Emprestimo> getAll() {
 		return emprestimoRepository.findAll();
@@ -140,5 +130,20 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		}
 		response.setEmprestimos(emprestimosResponse);
 		return ResponseEntity.ok(response);
+	}
+
+	@Override
+	public Flux<LivroDto> available() {
+		return livroService.livrosDisponiveis();
+	}
+
+	private Integer numberProtocol(){
+		Random gerador = new Random();
+		var protocolo = gerador.nextInt();
+		if( protocolo <= 0){
+			protocolo = protocolo * (-1);
+			return protocolo;
+		}
+		return protocolo;
 	}
 }
