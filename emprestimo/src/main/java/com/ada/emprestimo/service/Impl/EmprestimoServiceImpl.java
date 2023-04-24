@@ -58,6 +58,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 			emprestimoLivro.setIdLivro(livroDto.getId());
 			emprestimoLivro.setProtocolo(emprestimo.getProtocolo());
 			emprestimoLivroRepository.save(emprestimoLivro);
+			livroService.gerenciamentoEstoque(livroEmprestimo.getIdLivros(), Status.EMPRESTADO.getStatus());
 		}
 
 		return emprestimoRepository.save(emprestimo);
@@ -79,6 +80,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 				EmprestimoLivro emprestimoLivro = optionalEmprestimoLivro.get();
 				int idLivroEmprestimo = emprestimoLivro.getId();
 				emprestimoLivroRepository.deleteById(idLivroEmprestimo);
+				livroService.gerenciamentoEstoque(livroEmprestimo.getIdLivros(), Status.DEVOLVIDO.getStatus());
 
 			}
 			System.out.println(idLivro);

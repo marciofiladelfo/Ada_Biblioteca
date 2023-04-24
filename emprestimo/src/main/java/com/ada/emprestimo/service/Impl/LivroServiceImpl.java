@@ -31,4 +31,17 @@ public class LivroServiceImpl implements LivroService {
                 .retrieve()
                 .bodyToFlux(LivroDto.class);
     }
+    
+    @Override
+    public void gerenciamentoEstoque(int idLivro, String tipoTransacao) {
+		WebClient
+        .create(URL)
+        .patch()
+        .uri(URI + "/" + idLivro + "/estoque")
+        .header("tipoTransacao", tipoTransacao)
+        .retrieve()
+        .bodyToMono(String.class)
+        .subscribe(System.out::println);
+
+    }
 }
