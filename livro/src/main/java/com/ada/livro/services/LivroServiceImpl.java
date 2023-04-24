@@ -31,10 +31,9 @@ public class LivroServiceImpl implements LivroService {
     }
 
     @Override
-    public Optional<Livro> getById(int id) throws NotFoundException {
-        return Optional.ofNullable(livroRepository.findById(id).orElseThrow(
-                NotFoundException::new
-        ));
+    public Optional<Livro> getById(int id) {
+        verifyLivroExist(id);
+        return livroRepository.findById(id);
     }
 
     @Override
@@ -48,15 +47,15 @@ public class LivroServiceImpl implements LivroService {
     }
 
     @Override
-    public EstoqueResponse updateEstoque(int id, String tipoTransacao) {
-    	int quantidade = 1;
+    public EstoqueResponse updateEstoque(int id, Status tipoTransacao, Livro livro) {
+
         Optional<Livro> optional = livroRepository.findById(id);
         if (optional.isPresent()) {
             Livro livroBD = optional.get();
-            if (tipoTransacao.equalsIgnoreCase(Status.DEVOLVIDO.getStatus())) {
-                livroBD.setQuantidade(livroBD.getQuantidade() + quantidade);
-            } else if (tipoTransacao.equalsIgnoreCase(Status.EMPRESTADO.getStatus())) {
-                livroBD.setQuantidade(livroBD.getQuantidade() - quantidade);
+            if (tipoTransacao == DEVOLVIDO) {
+                livroBD.setQuantidade(livroBD.getQuantidade() + livro.getQuantidade());
+            } else if (tipoTransacao == EMPRESTADO) {
+                livroBD.setQuantidade(livroBD.getQuantidade() - livro.getQuantidade());
             }
             return livroRepository.save(livroBD).toDTOEstoque();
         }
@@ -65,6 +64,13 @@ public class LivroServiceImpl implements LivroService {
 
     @Override
     public void delete(int id) {
+        verifyLivroExist(id);
         livroRepository.deleteById(id);
+    }
+
+    private void verifyLivroExist(Integer id) {
+        if (livroRepository.findById(id).isEmpty()) {
+            throw new NotFoundException("Livro não encontrado ID: " + id);
+        }
     }
 }

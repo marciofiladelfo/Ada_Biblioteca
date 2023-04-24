@@ -56,7 +56,7 @@ public class LivroPendenteDevolucaoServiceImpl implements LivroPendenteDevolucao
         }).collect(Collectors.toList());
 
         if (ObjectUtils.isEmpty(pendente.getClientesPendenteDevolucao())){
-            throw new NotFoundException();
+            throw new NotFoundException("Não há devoluções pendentes");
         }else{
             return listaPendentes;
         }
