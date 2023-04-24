@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class NotFoundException extends Exception {
 
     public NotFoundException() {
-        super("Beer with name %s not found in the system.");
+        super("Não há pendencias de empréstimo.");
     }
 
 }

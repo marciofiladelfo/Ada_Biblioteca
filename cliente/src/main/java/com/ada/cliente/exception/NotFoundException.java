@@ -1,4 +1,4 @@
-package com.ada.livro.exception;
+package com.ada.cliente.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class NotFoundException extends Exception {
 
     public NotFoundException() {
-        super("Livro não foi encontrado.");
+        super("Cliente não foi encontrado.");
     }
 }

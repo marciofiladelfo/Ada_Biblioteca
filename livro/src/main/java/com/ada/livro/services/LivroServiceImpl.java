@@ -31,9 +31,9 @@ public class LivroServiceImpl implements LivroService {
     }
 
     @Override
-    public Optional<Livro> getById(int id) {
+    public Optional<Livro> getById(int id) throws NotFoundException {
         return Optional.ofNullable(livroRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("validation.livro.notfound", id)
+                NotFoundException::new
         ));
     }
 

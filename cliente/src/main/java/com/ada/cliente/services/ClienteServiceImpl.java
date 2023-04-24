@@ -3,6 +3,7 @@ package com.ada.cliente.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.ada.cliente.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,10 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public Cliente getOne(int id) {
-		return clienteRepository.findById(id).orElse(new Cliente());
+	public Optional<Cliente> getById(int id) throws NotFoundException {
+		return Optional.ofNullable(clienteRepository.findById(id).orElseThrow(
+				NotFoundException::new
+		));
 	}
 
 	@Override

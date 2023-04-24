@@ -1,5 +1,5 @@
-## Cadastrar, listar, alterar e deletar  clientes
-> GerenciarEmprestimo
+## Cadastrar, listar e gerenciar Empréstimo
+### GerenciarEmprestimo
 
 Resumo Geral do projeto.
 Esta API Rest é responsável por gerir toda o emprestimo e devolução de livros
@@ -23,19 +23,6 @@ o projeto:
 git clone 
 cd GerenciarEmprestimo
 ```
-
-### Building
-
-Etapas adicionais para o desenvolvedor construir o projeto após algumas alterações de código e configurações de IDE:
-
-Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
-
-## Premise
-
-
-## Configuration
-
-
 
 ## Deploy and Test
 
@@ -203,7 +190,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
         {
             "idLivro": 1,
             "nome": "Orgulho e preconceito",
-            "Clientes": [
+            "clientesPendenteDevolucao": [
                 {
                     "idCliente": 1,
                     "dataEmprestimo": "01/04/2023",
@@ -219,7 +206,7 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
         {
             "idLivro": 2,
             "nome": "Em busca do tempo perdido",
-            "Clientes": [
+            "clientesPendenteDevolucao": [
                 {
                     "idCliente": 3,
                     "dataEmprestimo": "05/04/2023",
@@ -231,44 +218,6 @@ PathParams: idCliente (idCliente): path param (idCliente) value=1</br>
                     "dataDevolucao": "08/04/2023"
                 }
             ]
-        }
-    ]
-}
-
-```
-
-
-### Avaliar se há necessidade deste recurso.
-6 - Listar todos os livros pendentes de devolução de um clienteDto
-
-- API: /emprestimo
-- End Point URL Path:  emprestimo/{id_cliente}
-- Method: GET
-- Objetivo: Listar todos os livros ao qual a data de devolução seja => que hoje de um cleinte especifico.
-- Descrição: Este método é responsável listar todos os livros que esteja com a data de devolução vencida de um clienteDto.
-
-PathParams: cliente_Id (cliente_Id): path param (cliente_Id) value=1
-```
-{   
-    "idCliente": 1,
-    "nome": "Mariana Silva",
-    "livros": [
-        {
-            "idLivro":1,
-            "nome": "Orgulho e preconceito",
-            "autor": "Jane Austen",
-            "editora": "Camelot Editora",
-            "descricao": "É um dos mais aclamados romances da escritora inglesa Jane Austen",
-            "genero": "Romance",
-            "dataEmprestimo": "09/04/2023"
-        },
-        {
-            "idLivro":2,
-            "nome": "Em busca do tempo perdido",
-            "autor": "Marcel Proust",
-            "editora": "Nova fronteira",
-            "descricao": "Em busca do tempo perdido é uma das maiores criações da literatura mundial",
-            "dataEmprestimo": "03/04/2023"
         }
     ]
 }

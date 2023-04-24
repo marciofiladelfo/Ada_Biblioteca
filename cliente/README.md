@@ -2,11 +2,11 @@
 ### Cliente
 
 Resumo Geral do projeto.
-Esta API Rest é responsável por gerir toda a entidade clienteDto.
+Esta API Rest é responsável por gerir toda a entidade Cliente.
 
 ### Getting Started
 
-* Java 11
+* Java 17
 * Maven
 * SpringBoot
 
@@ -23,19 +23,6 @@ o projeto:
 git clone 
 cd clientes
 ```
-
-### Building
-
-Etapas adicionais para o desenvolvedor construir o projeto após algumas alterações de código e configurações de IDE:
-
-Projeto padronizado de acordo com arquivo ``./resources/swagger.yml``
-
-## Premise
-
-
-## Configuration
-
-
 
 ## Deploy and Test
 

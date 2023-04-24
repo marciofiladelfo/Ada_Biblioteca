@@ -1,45 +1,44 @@
 package com.ada.cliente.controllers;
 
-import java.util.List;
-
-import com.ada.cliente.services.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.ada.cliente.exception.NotFoundException;
 import com.ada.cliente.model.Cliente;
+import com.ada.cliente.services.ClienteService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("clientes")
+@RequiredArgsConstructor
 public class ClienteController {
-	
-	@Autowired
-	private ClienteService clienteService;
+
+	private final ClienteService clienteService;
 	
 	@PostMapping
-	public Cliente save(@RequestBody Cliente cliente) {				
-		return clienteService.save(cliente);
+	public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
+		Cliente clienteEntity = clienteService.save(cliente);
+		return ResponseEntity.ok(clienteEntity);
 	}
 	
-	@GetMapping("")
-	public List<Cliente> getAll() {
-		return clienteService.getAll();
+	@GetMapping
+	public ResponseEntity<List<Cliente>> getAll() {
+		List<Cliente> clienteList = clienteService.getAll();
+		return ResponseEntity.ok(clienteList);
 	}
 	
 	@GetMapping("{id}")
-	public Cliente getOne(@PathVariable Integer id) {							
-		return clienteService.getOne(id);
+	public ResponseEntity<Optional<Cliente>> getOne(@PathVariable Integer id) throws NotFoundException {
+		Optional<Cliente> clienteEntity = clienteService.getById(id);
+		return ResponseEntity.ok(clienteEntity);
 	}
 	
 	@PutMapping("{id}")
-	public Cliente update(@PathVariable int id, @RequestBody Cliente cliente) {
-		return clienteService.update(id, cliente);
+	public ResponseEntity<Cliente> update(@PathVariable int id, @RequestBody Cliente cliente) {
+		Cliente clienteEntity = clienteService.update(id, cliente);
+		return ResponseEntity.ok(clienteEntity);
 	}
 	
 	@DeleteMapping("{id}")
